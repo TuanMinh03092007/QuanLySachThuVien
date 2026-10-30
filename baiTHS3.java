@@ -5,18 +5,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        String maSach;
-        String tenSach;
-        String tacGia;
-        int namXuatBan;
+        String maSach, tenSach, tacGia;
+        int namXuatBan, soLuong, loaiSach;
         double donGia;
-        int soLuong;
 
-        double thanhTien;
-        double phiVanChuyen;
-        double tongTienNhap;
-
-        // Bai 1: Nhap thong tin sach
+        // Nhap thong tin sach
         System.out.print("Nhap ma sach: ");
         maSach = sc.nextLine();
 
@@ -35,14 +28,86 @@ public class Main {
         System.out.print("Nhap so luong: ");
         soLuong = Integer.parseInt(sc.nextLine());
 
-        // Bai 2: Tinh thanh tien
-        thanhTien = donGia * soLuong;
+        // Bai 1: Kiem tra tinh hop le
+        System.out.println("\n===== BAI 1: KIEM TRA HOP LE =====");
 
-        // Bai 3: Tinh phi van chuyen
-        phiVanChuyen = thanhTien * 0.05;
+        boolean hopLe = true;
 
-        // Bai 4: Tinh tong tien nhap
-        tongTienNhap = thanhTien + phiVanChuyen;
+        if (donGia <= 0) {
+            System.out.println("Don gia khong hop le!");
+            hopLe = false;
+        }
+
+        if (soLuong < 0) {
+            System.out.println("So luong khong hop le!");
+            hopLe = false;
+        }
+
+        if (namXuatBan <= 0 || namXuatBan > 2026) {
+            System.out.println("Nam xuat ban khong hop le!");
+            hopLe = false;
+        }
+
+        if (hopLe) {
+            System.out.println("Thong tin sach hop le!");
+        }
+
+        // Bai 2: Phan loai gia sach
+        System.out.println("\n===== BAI 2: PHAN LOAI GIA =====");
+
+        if (donGia <= 0) {
+            System.out.println("Khong the phan loai gia sach!");
+        } else if (donGia < 50000) {
+            System.out.println("Sach gia thap");
+        } else if (donGia <= 100000) {
+            System.out.println("Sach gia trung binh");
+        } else if (donGia <= 200000) {
+            System.out.println("Sach gia cao");
+        } else {
+            System.out.println("Sach gia dac biet");
+        }
+
+        // Bai 3: Phan loai ton kho
+        System.out.println("\n===== BAI 3: PHAN LOAI TON KHO =====");
+
+        if (soLuong < 0) {
+            System.out.println("So luong khong hop le!");
+        } else if (soLuong == 0) {
+            System.out.println("Het sach");
+        } else if (soLuong <= 5) {
+            System.out.println("Sap het sach");
+        } else if (soLuong <= 20) {
+            System.out.println("Con it sach");
+        } else {
+            System.out.println("Con nhieu sach");
+        }
+
+        // Bai 4: Chon loai sach bang switch
+        System.out.println("\n===== BAI 4: CHON LOAI SACH =====");
+        System.out.println("1. Sach giao khoa");
+        System.out.println("2. Sach tham khao");
+        System.out.println("3. Sach chuyen nganh");
+        System.out.println("4. Sach khac");
+
+        System.out.print("Nhap loai sach (1-4): ");
+        loaiSach = Integer.parseInt(sc.nextLine());
+
+        switch (loaiSach) {
+            case 1:
+                System.out.println("Loai sach: Sach giao khoa");
+                break;
+            case 2:
+                System.out.println("Loai sach: Sach tham khao");
+                break;
+            case 3:
+                System.out.println("Loai sach: Sach chuyen nganh");
+                break;
+            case 4:
+                System.out.println("Loai sach: Sach khac");
+                break;
+            default:
+                System.out.println("Loai sach khong hop le!");
+        }
 
         // Hien thi thong tin sach
         System.out.println("\n===== THONG TIN SACH =====");
@@ -52,12 +117,6 @@ public class Main {
         System.out.println("Nam xuat ban: " + namXuatBan);
         System.out.println("Don gia: " + donGia);
         System.out.println("So luong: " + soLuong);
-
-        // Hien thi ket qua tinh tien
-        System.out.println("\n===== KET QUA NHAP KHO =====");
-        System.out.printf("Thanh tien: %.2f%n", thanhTien);
-        System.out.printf("Phi van chuyen: %.2f%n", phiVanChuyen);
-        System.out.printf("Tong tien nhap: %.2f%n", tongTienNhap);
 
         sc.close();
     }

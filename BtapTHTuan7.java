@@ -63,7 +63,83 @@ public class Test {
             scanner.next();
         }
         int giaTri = scanner.nextInt();
-        scanner.nextLine();
+        scanner.nextLine();import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Sach> danhSach = new ArrayList<>();
+
+        System.out.print("Nhap so luong sach can quan ly: ");
+        int n = Integer.parseInt(sc.nextLine());
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\n--- Nhap sach thu " + (i + 1) + " ---");
+            System.out.print("Chon loai (1: Sach giao khoa, 2: Sach tham khao): ");
+            int loai = Integer.parseInt(sc.nextLine());
+
+            Sach s;
+            if (loai == 1) {
+                s = new SachGiaoKhoa();
+            } else {
+                s = new SachThamKhao();
+            }
+
+            s.nhap(sc);
+            danhSach.add(s);
+        }
+
+        System.out.println("\n=== DANH SACH CAC LOAI SACH ===");
+        for (Sach s : danhSach) {
+            s.xuat();
+        }
+
+        double tongTienSGK = 0;
+        double tongTienSTK = 0;
+        double tongDonGiaSTK = 0;
+        int demSTK = 0;
+
+        for (Sach s : danhSach) {
+            if (s instanceof SachGiaoKhoa) {
+                tongTienSGK += s.tinhThanhTien();
+            } else if (s instanceof SachThamKhao) {
+                tongTienSTK += s.tinhThanhTien();
+                tongDonGiaSTK += s.donGia;
+                demSTK++;
+            }
+        }
+
+        System.out.println("\n=== THONG KE ===");
+        System.out.printf("Tong thanh tien Sach giao khoa: %.2f%n", tongTienSGK);
+        System.out.printf("Tong thanh tien Sach tham khao: %.2f%n", tongTienSTK);
+
+        if (demSTK > 0) {
+            double trungBinhDonGiaSTK = tongDonGiaSTK / demSTK;
+            System.out.printf("Trung binh cong don gia Sach tham khao: %.2f%n", trungBinhDonGiaSTK);
+        } else {
+            System.out.println("Khong co Sach tham khao nao de tinh trung binh don gia.");
+        }
+
+        System.out.print("\nNhap ten nha xuat ban X can tim SGK: ");
+        String nxbX = sc.nextLine().trim();
+
+        System.out.println("=== SACH GIAO KHOA CUA NXB " + nxbX + " ===");
+        boolean timThay = false;
+        for (Sach s : danhSach) {
+            if (s instanceof SachGiaoKhoa && s.nhaXuatBan.equalsIgnoreCase(nxbX)) {
+                s.xuat();
+                timThay = true;
+            }
+        }
+
+        if (!timThay) {
+            System.out.println("Khong tim thay sach giao khoa nao thuoc NXB nay.");
+        }
+
+        sc.close();
+    }
+}
         return giaTri;
     }
     public static void main(String[] args) {
